@@ -1,0 +1,61 @@
+After installation  of AWS CLI
+
+Open cmd in Admin mode
+
+aws --version      check version
+
+aws configure --profile mycliuser
+
+
+AWS Access Key ID [None]:     AKIAxxxxxxxxxxxxxxxx
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]:   ap-south-1
+Default output format [None]: json
+
+Replace mycliuser with any profile name you like
+✅ This saves your credentials in:
+
+~/.aws/credentials
+
+~/.aws/config
+
+
+
+set AWS_PROFILE=mycliuser    // Only for the current session
+
+aws ec2 describe-instances     // Describing instances
+
+
+aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,State.Name]" --output table    //listing instance name and status
+
+
+
+aws ec2 start-instances --instance-ids i-01fc1a3e5fe53bf0b      //Start Ec2 instance 
+
+ 
+aws ec2 stop-instances --instance-ids i-01fc1a3e5fe53bf0b	//Stop Ec2 instance 
+
+
+aws ec2 reboot-instances --instance-ids i-01fc1a3e5fe53bf0b	// Reboot Ec2 instance
+
+
+aws ec2 terminate-instances --instance-ids i-01fc1a3e5fe53bf0b      //Delete or terminate Ec2 instance
+
+
+aws ec2 describe-instances --query "Reservations[1].Instances[*].[InstanceId,State.Name,NetworkInterfaces[*].Association.PublicIp]" --output table
+
+Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicIp
+
+
+
+
+for SSH 
+ssh-keygen -R 18.213.154.16
+
+
+
+
+
+
+
+

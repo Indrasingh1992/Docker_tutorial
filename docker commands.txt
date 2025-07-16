@@ -1,0 +1,320 @@
+Docker commands 
+--------------------------
+
+
+docker run -it --name new_contatiner ubuntu /bin/bash        
+
+ When you run this command:
+Docker checks if the Ubuntu image is available locally. If not, it downloads the image from Docker Hub.It then creates a new container from the Ubuntu image. The -it flags make sure that you can interact with the shell.A Bash shell is started within the container, allowing you to execute commands as if you were using a regular Ubuntu terminal.
+
+
+
+
+
+docker images
+
+all Docker images available on your local machine
+
+
+
+
+
+docker ps
+
+check which containers are currently running on your system , add -a to check all containers
+
+
+
+
+
+docker pull image
+used to download the official Docker image from Docker Hub to your local machine.  image can be unbuntu, jenkins or any setup
+
+
+
+
+
+
+docker start [container]
+is used to start a stopped container. Ensure you have the correct name or ID, and check the container’s status after starting it.
+
+
+
+
+docker stop [container]
+is used to stop a started container. Ensure you have the correct name or ID, and check the container’s status after stopping it.
+
+
+
+
+docker attach [container]
+ command is used to connect your terminal to a running container's standard input, output, and error streams. This allows you to interact with the container as if you were directly accessing its terminal.Use it carefully, as it can affect the running processes within the container.
+ 
+ 
+ 
+ 
+ 
+ docker exec -it [container_name_or_id] /bin/bash
+ is used to start a new interactive shell session inside a running Docker container.docker exec is generally more versatile for administrative tasks, whereas docker attach is more suited for direct interaction with the primary process.
+ 
+ 
+ 
+ 
+docker rm [container]  ;   docker rm container1 container2 container3 ;  docker container prune
+command will only work on stopped containers.  you can use the -f flag to forcefully remove a running container.  2nd cmd is remove multiple container. 3rd is to remove all stopped containers
+
+
+
+
+
+
+docker commit [OPTIONS] CONTAINER NEW_IMAGE_NAME    
+docker commit sonucontianer updateimage ;
+commit a Docker container and create a new image from it, you can use the docker commit command. This command saves the changes made to a container's filesystem as a new image.
+
+
+
+
+
+
+docker diff [container name]  
+command is used to inspect changes made to a container's filesystem since it was started. It shows what has been added, modified, or deleted in the container compared to its original state.
+ 
+ 
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File System:  Docker file components and difference command 
+
+
+A Dockerfile is a text file that contains a set of instructions used to build a Docker image. These instructions define how to configure and package the software, libraries, and dependencies required for the application you want to containerize.
+
+
+
+
+In Docker, parser directives are special instructions placed at the beginning of a Dockerfile that influence how the file is processed by the Docker engine. These directives allow you to control certain behaviors, such as the default shell to be used for RUN commands or encoding for the Dockerfile itself.
+
+
+
+
+
+
+
+# syntax
+
+Purpose: Specifies the syntax or the version of the build backend to use, which allows features from specific versions of Docker BuildKit.
+Usage: This directive helps specify which build system or additional features should be supported during the build process.
+
+ syntax=docker/dockerfile:1.2
+ 
+ 
+# syntax=docker/dockerfile:1.3
+FROM ubuntu:20.04
+RUN echo "Using BuildKit features from Dockerfile syntax version 1.3"
+
+This Dockerfile specifies the use of Docker BuildKit features from version 1.3.
+ 
+ 
+ 
+
+
+ 
+# escape
+
+Purpose: Specifies the escape character to be used for line continuations in the Dockerfile. By default, Docker uses \ for line continuation, but you can change it to another character like backtick (`).
+Usage: This directive is useful for Windows-based containers where the backslash \ is commonly used in file paths.
+# escape=`
+
+# escape=`
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+RUN dir C:\Windows `
+    && echo "Line continuation using backtick (`)"
+
+In this example, the escape directive changes the line continuation character to a backtick, which is more suitable for Windows containers using Windows-style paths.
+
+
+
+Without the # escape directive, Docker defaults to using \ as the line continuation character.
+Without the # syntax directive, Docker uses the default syntax compatible with the current Docker version.
+
+
+
+
+ARG				Use build-time variables.
+FROM			Create a new build stage from a base image.
+RUN				Execute build commands.
+MAINTAINER		Specify the author of an image.
+COPY			Copy files and directories.
+ADD				Add local or remote files and directories.
+EXPOSE			Describe which ports your application is listening on.
+WORKDIR			Change working directory.
+CMD				Specify default commands.
+ENTRYPOINT		Specify default executable.
+ENV				Set environment variables.
+
+
+
+
+
+ARG variables are only accessible during the build phase of a Docker image and are not available during the runtime of a container. Once the build is complete, the ARG values are discarded and cannot be accessed inside a running container. If you need access to the values during the runtime of the container, you will need to pass them as environment variables using ENV or provide runtime options via docker run.
+
+
+
+
+
+Create a Dockerfile
+
+vi Dockerfile
+
+
+FROM ubuntu
+RUN echo "My name is Indra Singh" > /tmp/testfile
+
+saveit in vm press esc---> wq  enter
+
+run command    :    Docker build -t test .
+again create container from the above image and check the /tmp directory, you will get the file
+
+
+
+
+
+Another example
+
+Create a Dockerfile
+
+vi Dockerfile
+
+
+FROM ubuntu
+WORKDIR /tmp
+RUN echo "My name is Indra Singh" > /tmp/testfile
+ENV myname IndraSingh
+COPY testfile1 /tmp
+ADD test.tar.gz /tmp
+
+
+saveit in vm press esc---> wq  enter
+
+touch testfile1					# create a testfile1
+touch test						# create a test
+tar -cvf test.tar test			#convert into test.tar
+gzip test.tar					#zip to gz for test.tar to create test.tar.gz
+rm -rf test						#remove test file as test.tar.gz file created
+exit							# exit from container
+
+
+dock build -t newimage1							  # create image from docker file
+docker run -it --name newcontatiner newimage1     # create and run the container from newimage1
+check all the files 
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Docker Volume
+
+
+#create a file and dockerfile
+touch file1 file2 Dockerfile
+
+
+#edit docker file:
+vi Dockerfile
+
+
+#enter the commmand  in docker file:
+FROM Ubuntu
+VOLUME [/"myvolume"]
+
+press esc
+:wq enter
+
+
+
+#create image from file 
+docker build -t myimage .
+
+
+
+#check docker images:
+docker images
+
+
+
+#create container from myimage:
+docker run -it --name contatiner newimage /bin/bash
+
+
+
+
+#create file inside myvolume then exit from  contianer
+touch filex filey filez
+exit
+
+
+
+
+#creates a new container named container2 from the Ubuntu image, runs in privileged mode, granting it more permissions.It shares volumes with an existing container (contatiner)
+After starting the container, it drops you into an interactive bash shell within the Ubuntu environment of the container.
+
+docker run -it --name container2 --privileged=true --volumes-from contatiner ubuntu /bin/bash
+
+
+
+
+#create volume using command 
+docker run -it --name contatiner3 -v /volume2 ubuntu /bin/bash
+
+
+
+#same as above shares volumes with an existing container(container3) and creating new container (container4) 
+docker run -it --name container4 --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
+
+
+
+#Map host volume to container
+docker run -it --name hostcont -v /home/azureuser:/sonu --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Port Mapping (request made on local(host) forwarded to port on container)
+
+docker run -td --name techserver -p 80:80 ubuntu
+
+#The command creates and starts a new Docker container called techserver in the background, using the official ubuntu image. It allocates a terminal (-t), runs in detached mode (-d), and maps port 80 on the host to port 80 inside the container (-p 80:80). This setup is typically used to run a web server or another service that listens on port 80.
+
+
+
+example
+
+apt-get install apache2 -y
+cd /var/www/html
+echo "subscribe indra technical">index.html
+service apache2 restart 
+
+# check public ip with port :80 we will get the out put as "subscribe indra technical".  Note inbound rule should be set for port 80.
+
+
+
+
+docker run -td --name myjenkins -p 8080:8080 jenkins/jenkins:lts
+# this command runs Jenkins in a detached Docker container, names it myjenkins, and makes Jenkins accessible via port 8080 on your machine.  Note inbound rule should be set for port 8080.
+
+
+
+
+Docker hub login 
+docker login -u indra1872
+	
+personal access token:  dckr_pat_HETp_ZKBc4FryH6aJrR1D1alf38
+
+
+
+
+
+
+
+
