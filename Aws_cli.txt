@@ -30,16 +30,16 @@ aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,Sta
 
 
 
-aws ec2 start-instances --instance-ids i-01fc1a3e5fe53bf0b      //Start Ec2 instance 
+aws ec2 start-instances --instance-ids i-0525cda1d1196be2a      //Start Ec2 instance 
 
  
-aws ec2 stop-instances --instance-ids i-01fc1a3e5fe53bf0b	//Stop Ec2 instance 
+aws ec2 stop-instances --instance-ids i-0525cda1d1196be2a	//Stop Ec2 instance 
 
 
-aws ec2 reboot-instances --instance-ids i-01fc1a3e5fe53bf0b	// Reboot Ec2 instance
+aws ec2 reboot-instances --instance-ids i-0525cda1d1196be2a	// Reboot Ec2 instance
 
 
-aws ec2 terminate-instances --instance-ids i-01fc1a3e5fe53bf0b      //Delete or terminate Ec2 instance
+aws ec2 terminate-instances --instance-ids i-0525cda1d1196be2a      //Delete or terminate Ec2 instance
 
 
 aws ec2 describe-instances --query "Reservations[1].Instances[*].[InstanceId,State.Name,NetworkInterfaces[*].Association.PublicIp]" --output table
