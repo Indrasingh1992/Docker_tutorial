@@ -256,53 +256,6 @@ exit
 
 
 #creates a new container named container2 from the Ubuntu image, runs in privileged mode, granting it more permissions.It shares volumes with an existing container (contatiner)
-After starting the container, it drops you into an interactive bash shell within the Ubuntu environment of the container.
-
-docker run -it --name container2 --privileged=true --volumes-from contatiner ubuntu /bin/bash
-
-
-
-
-#create volume using command 
-docker run -it --name contatiner3 -v /volume2 ubuntu /bin/bash
-
-
-
-#same as above shares volumes with an existing container(container3) and creating new container (container4) 
-docker run -it --name container4 --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
-
-
-
-#Map host volume to container
-docker run -it --name hostcont -v /home/azureuser:/sonu --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
-
-
-
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Port Mapping (request made on local(host) forwarded to port on container)
-
-docker run -td --name techserver -p 80:80 ubuntu
-
-#The command creates and starts a new Docker container called techserver in the background, using the official ubuntu image. It allocates a terminal (-t), runs in detached mode (-d), and maps port 80 on the host to port 80 inside the container (-p 80:80). This setup is typically used to run a web server or another service that listens on port 80.
-
-
-
-example
-
-apt-get install apache2 -y
-cd /var/www/html
-echo "subscribe indra technical">index.html
-service apache2 restart 
-
-# check public ip with port :80 we will get the out put as "subscribe indra technical".  Note inbound rule should be set for port 80.
-
-
-
-
-docker run -td --name myjenkins -p 8080:8080 jenkins/jenkins:lts
-# this command runs Jenkins in a detached Docker container, names it myjenkins, and makes Jenkins accessible via port 8080 on your machine.  Note inbound rule should be set for port 8080.
-
 
 
 
@@ -314,6 +267,34 @@ personal access token:  dckr_pat_HETp_ZKBc4FryH6aJrR1D1alf38
 
 
 
+-------------------------------------------------------------------------------------------------
+Bash scriptfile for installation of docker
+
+#!/bin/bash
+set -e  # Exit on any error
+
+echo "Updating package list..."
+sudo apt-get update -y
+
+echo "Installing Docker..."
+sudo apt-get install -y docker.io
+
+echo "👤 Adding user '$USER' to the 'docker' group..."
+sudo usermod -aG docker $USER
+
+echo "⚠️ 'newgrp docker' will start a new shell — the script will stop here if used directly."echo "⚠️ 'newgrp docker' will start a new shell — the script will stop here if used directly"
+newgrp docker
+
+echo "Logging into Docker..."
+echo "dckr_pat_HETp_ZKBc4FryH6aJrR1D1alf38" | docker login --username indra1872 --password-stdin
+
+--------------------------------------------------------------------------------------------------------------
+
+run             chmod +x install_and_login_docker.sh
+run             ./install_and_login_docker.sh
+
+
+-----------------------------------------------------------------------------------
 
 
 

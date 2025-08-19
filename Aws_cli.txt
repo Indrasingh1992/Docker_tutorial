@@ -30,19 +30,19 @@ aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,Sta
 
 
 
-aws ec2 start-instances --instance-ids i-0525cda1d1196be2a      //Start Ec2 instance 
+aws ec2 start-instances --instance-ids i-0a640873d7f71985f      //Start Ec2 instance 
 
  
-aws ec2 stop-instances --instance-ids i-0525cda1d1196be2a	//Stop Ec2 instance 
+aws ec2 stop-instances --instance-ids i-0a640873d7f71985f	//Stop Ec2 instance 
 
 
-aws ec2 reboot-instances --instance-ids i-0525cda1d1196be2a	// Reboot Ec2 instance
+aws ec2 reboot-instances --instance-ids i-0a640873d7f71985f	// Reboot Ec2 instance
 
 
-aws ec2 terminate-instances --instance-ids i-0525cda1d1196be2a      //Delete or terminate Ec2 instance
+aws ec2 terminate-instances --instance-ids i-0a640873d7f71985f      //Delete or terminate Ec2 instance
 
 
-aws ec2 describe-instances --query "Reservations[1].Instances[*].[InstanceId,State.Name,NetworkInterfaces[*].Association.PublicIp]" --output table
+aws ec2 describe-instances --query "Reservations[0].Instances[*].[InstanceId,State.Name,NetworkInterfaces[*].Association.PublicIp]" --output table
 
 Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicIp
 
@@ -51,6 +51,11 @@ Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicIp
 
 for SSH 
 ssh-keygen -R 18.213.154.16
+
+
+
+01:50:30
+
 
 
 
