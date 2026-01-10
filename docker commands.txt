@@ -1,32 +1,26 @@
 Docker Install
 -------------------------
 
-#!/bin/bash
-set -e  # Exit immediately if a command exits with a non-zero status
+#!/usr/bin/env bash
 
-echo "🔄 Updating package list..."
-sudo apt-get update -y
+sudo apt update && \
+sudo apt install -y ca-certificates curl && \
+sudo install -m 0755 -d /etc/apt/keyrings && \
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg \
+  -o /etc/apt/keyrings/docker.asc && \
+sudo chmod a+r /etc/apt/keyrings/docker.asc && \
+sudo tee /etc/apt/sources.list.d/docker.sources >/dev/null <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
-echo "🐳 Installing Docker..."
-sudo apt-get install -y docker.io
-
-echo "👤 Adding user '$USER' to the 'docker' group..."
-sudo usermod -aG docker $USER
-
-echo "⚠️ 'newgrp docker' will start a new shell — the script will stop here if used directly."
-echo "🟡 Please log out and log back in after this script to apply group change."
-# Remove or comment this line if you want to avoid shell transition
+sudo apt update && \
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
+sudo usermod -aG docker "$USER" && \
 newgrp docker
-
-echo "🔐 Logging into Docker Hub..."
-echo "dckr_pat_HETp_ZKBc4FryH6aJrR1D1alf38" | docker login --username indra1872 --password-stdin
-
-echo "✅ All steps completed successfully."
-
-
-
-RUN   chmod +x file_name.sh
-RUN   ./file_name.sh
 
 ---------------------------------------------------------------------------------
 
