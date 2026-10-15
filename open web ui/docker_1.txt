@@ -1,0 +1,13 @@
+docker exec -it openwebui-open-webui-1 /bin/bash
+curl http://host.docker.internal:8888
+curl http://172.17.0.1:8888
+
+curl -v http://host.docker.internal:8888
+
+
+docker compose down && docker compose up -d            // restart docker
+
+docker compose -f docker-compose.yml logs -f open-webui       // check logs
+
+
+docker volume inspect open-webui           // get location in host volume created by docker     

@@ -1,0 +1,59 @@
+# ──────────────────────────────────────────────────────────────────────
+# OmniRoute — Recommended single-node stack (prebuilt image + Redis)
+# ──────────────────────────────────────────────────────────────────────
+#   Run:   docker compose up -d
+#   Dashboard: http://localhost:20128/dashboard
+#   API:       http://localhost:20128/v1   (also on :20129)
+#
+#   Before first run: set OMNIROUTE_WS_BRIDGE_SECRET to a strong random
+#   string (e.g. `openssl rand -hex 32`).
+# ──────────────────────────────────────────────────────────────────────
+
+services:
+  omniroute:
+    image: diegosouzapw/omniroute:latest-web
+    container_name: omniroute-gateway
+    restart: unless-stopped
+    stop_grace_period: 40s              # let SQLite (WAL) checkpoint on shutdown
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "20128:20128"                   # Dashboard + API (/v1)
+      - "20129:20129"                   # dedicated API listener
+    volumes:
+      - omniroute-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=20128
+      - API_PORT=20129
+      - HOSTNAME=0.0.0.0
+      - REDIS_URL=redis://redis:6379
+      - OMNIROUTE_WS_BRIDGE_SECRET=65bcebdcda883a0af7298aa8d22155b985c26ec996b100643be34ebef03c2e8f
+      # Optional: raise Node heap ceiling if you hit memory pressure
+      # - OMNIROUTE_MEMORY_MB=512
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.mjs"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  redis:
+    image: redis:7-alpine
+    container_name: omniroute-redis
+    restart: unless-stopped
+    volumes:
+      - omniroute-redis-data:/data
+    command: redis-server --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  omniroute-data:
+    driver: local
+  omniroute-redis-data:
+    driver: local

@@ -1,0 +1,53 @@
+model,http,ms,status,note
+auto/best-free,200,5384,OK,ok
+auto/coding:free,200,8430,OK,ok
+oc/muse-spark-1.2-contributor-free,403,4089,FAIL,[403]: Error from provider (Console): OpenCode's free tier c
+oc/deepseek-v4-flash-free,400,1077,FAIL,[400]: Error from provider (Console): Upstream request faile
+oc/mimo-v2.5-free,403,4053,FAIL,[403]: Error from provider (Console): OpenCode's free tier c
+oc/hy3-free,401,4011,FAIL,[401]: Model hy3-free is not supported
+oc/nemotron-3-ultra-free,403,1033,FAIL,[403]: Error from provider (Console): OpenCode's free tier c
+oc/north-mini-code-free,401,976,FAIL,[401]: Model north-mini-code-free is not supported
+openrouter/dots-studio/dots-3-note-preview:free,200,2746,OK,ok
+openrouter/liquid/lfm-2.5-2.6b:free,200,1308,OK,ok
+openrouter/nvidia/nemotron-3.5-lightning:free,200,1979,OK,Here's a thinking process:1.
+openrouter/thinkingmachines/inkling-small:free,403,33636,FAIL,[openrouter/thinkingmachines/inkling-small:free] [403]: thin
+openrouter/poolside/laguna-s-2.1:free,200,9209,OK,ok
+openrouter/thinkingmachines/inkling:free,403,24609,FAIL,[openrouter/thinkingmachines/inkling:free] [403]: thinkingma
+openrouter/poolside/laguna-xs-2.1:free,200,1045,OK,Okay the user just said Repl
+openrouter/cohere/north-mini-code:free,200,946,OK,ok
+openrouter/z-ai/glm-5.2:free,404,198,FAIL,[openrouter/z-ai/glm-5.2:free] [404]: This model is unavaila
+openrouter/nvidia/nemotron-3.5-content-safety:free,200,1797,OK,We need to decide: user input
+openrouter/nvidia/nemotron-3-ultra-550b-a55b:free,200,1646,OK,ok
+openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,200,1316,OK,ok
+openrouter/google/gemma-4-26b-a4b-it:free,200,1405,OK,ok
+openrouter/google/gemma-4-31b-it:free,504,28013,FAIL,[504]: The operation was aborted
+openrouter/nvidia/nemotron-3-super-120b-a12b:free,200,521,OK,ok
+openrouter/nvidia/nemotron-3-nano-30b-a3b:free,404,168,FAIL,[openrouter/nvidia/nemotron-3-nano-30b-a3b:free] [404]: This
+openrouter/nvidia/nemotron-nano-12b-v2-vl:free,404,183,FAIL,[openrouter/nvidia/nemotron-nano-12b-v2-vl:free] [404]: No e
+openrouter/nvidia/nemotron-nano-9b-v2:free,404,156,FAIL,[openrouter/nvidia/nemotron-nano-9b-v2:free] [404]: No endpo
+zerolimitai/google/gemma-4-26b-a4b-it:free,200,4795,OK,ok
+zerolimitai/qwen/qwen3.8-27b:free,200,6450,OK,ok
+zerolimitai/google/gemma-4-31b-it:free,000,60034,FAIL,
+zerolimitai/cohere/north-mini-code:free,200,1934,OK,ok
+zerolimitai/dots-studio/dots-3-note-preview:free,200,4826,OK,ok
+zerolimitai/apodex/apodex-1.1-mini:free,200,2712,OK,ok
+zerolimitai/inclusionai/ling-3.0-flash-sante:free,200,3008,OK,ok
+kilo-gateway/minimax/minimax-m2.5:free,400,51,FAIL,Model 'minimax/minimax-m2.5:free' is not available in the ac
+kilo-gateway/arcee-ai/trinity-large-preview:free,400,45,FAIL,Model 'arcee-ai/trinity-large-preview:free' is not available
+kilo-gateway/poolside/laguna-s-2.1:free,200,4104,OK,ok
+kilo-gateway/nvidia/nemotron-3-ultra-550b-a55b:free,200,5834,OK,ok
+kilo-gateway/dots-studio/dots-3-note-preview:free,200,2179,OK,ok
+kilo-gateway/nex-agi/nex-n2.5-pro:free,404,448,FAIL,[kilo-gateway/nex-agi/nex-n2.5-pro:free] [404]: The requeste
+kilo-gateway/inclusionai/ling-3.0-flash-vl:free,404,465,FAIL,[kilo-gateway/inclusionai/ling-3.0-flash-vl:free] [404]: The
+kilo-gateway/nex-agi/nex-n2.5-mini:free,404,429,FAIL,[kilo-gateway/nex-agi/nex-n2.5-mini:free] [404]: The request
+kilo-gateway/inclusionai/ling-3.0-flash-sante:free,200,1389,OK,ok
+kilo-gateway/inclusionai/ling-3.0-flash-fin:free,404,438,FAIL,[kilo-gateway/inclusionai/ling-3.0-flash-fin:free] [404]: Th
+kilo-gateway/liquid/lfm-2.5-2.6b:free,200,1015,OK,ok
+kilo-gateway/nvidia/nemotron-3.5-lightning:free,200,3486,OK,Here's a thinking process:1.
+kilo-gateway/thinkingmachines/inkling-small:free,429,57077,FAIL,All credentials for model thinkingmachines/inkling-small:fre
+kilo-gateway/poolside/laguna-xs-2.1:free,200,12741,OK,Okay the user just said Repl
+kilo-gateway/cohere/north-mini-code:free,200,3615,OK,ok
+kilo-gateway/nvidia/nemotron-3.5-content-safety:free,200,1451,OK,We need to classify user inpu
+kilo-gateway/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,200,1883,OK,ok
+kilo-gateway/nvidia/nemotron-3-super-120b-a12b:free,200,1099,OK,ok
+kilo-gateway/stepfun/step-3.7-flash:free,200,14263,OK,Got it the user wants me to r

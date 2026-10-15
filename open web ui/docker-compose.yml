@@ -1,0 +1,18 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - AIOHTTP_CLIENT_TIMEOUT=3600
+      - AIOHTTP_CLIENT_STREAM_IDLE_TIMEOUT=3600
+      - WEBUI_SECRET_KEY=Sqt0xmTE5A82oPVUdgvn62hYm6L98u/0jmKvNLfdxaU=
+    restart: unless-stopped
+
+volumes:
+  open-webui:
+  

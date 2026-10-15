@@ -1,0 +1,7 @@
+{
+    "editor.fontSize": 14,
+    "files.associations": {
+    "my-omniroute.yml": "dockercompose",
+    "open_web-ui.yml": "dockercompose"
+  }
+}
